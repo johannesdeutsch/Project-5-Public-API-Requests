@@ -19,16 +19,16 @@ galleryDiv.insertAdjacentHTML('beforeend', '</div>');
 
 const body = document.getElementsByTagName('body');
 body.insertAdjacentHTML('beforeend', '<div class="modal-container">');
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
-body.insertAdjacentHTML('beforeend',
+body.insertAdjacentHTML('beforeend', '<div class="modal">');
+body.insertAdjacentHTML('beforeend', '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>');
+body.insertAdjacentHTML('beforeend', '<div class="modal-info-container">');
+body.insertAdjacentHTML('beforeend', '<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">');
+body.insertAdjacentHTML('beforeend', '<h3 id="name" class="modal-name cap">name</h3>');
+body.insertAdjacentHTML('beforeend', '<p class="modal-text">email</p>');
+body.insertAdjacentHTML('beforeend', '<p class="modal-text cap">city</p>');
+body.insertAdjacentHTML('beforeend', '<hr>');
+body.insertAdjacentHTML('beforeend', '<p class="modal-text">(555) 555-5555</p>');
+body.insertAdjacentHTML('beforeend', '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>');
+body.insertAdjacentHTML('beforeend', '<p class="modal-text">Birthday: 10/21/2015</p>');
+body.insertAdjacentHTML('beforeend', '</div>');
+body.insertAdjacentHTML('beforeend', '</div>');
