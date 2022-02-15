@@ -1,9 +1,9 @@
 
-const searchContainerDiv = document.getElementsByClassName('search-container');
-searchContainerDiv.insertAdjacentHTML('beforeend', '<form action="#" method="get">');
+const searchContainerDiv = document.querySelector('.search-container');
+searchContainerDiv.insertAdjacentHTML("beforeend", "<form action='#' method='get'>");
 searchContainerDiv.insertAdjacentHTML('beforeend', '<input type="search" id="search-input" class="search-input" placeholder="Search...">');
 searchContainerDiv.insertAdjacentHTML('beforeend', '<input type="submit" value="&#x1F50D;" id="search-submit" class="search-submit"></input>');
-searchContainerDiv.insertAdjacentHTML('beforeend', ' </form>');
+searchContainerDiv.insertAdjacentHTML('beforeend', '</form>');
 
 const galleryDiv = document.getElementById('gallery');
 galleryDiv.insertAdjacentHTML('beforeend', '<div class="card">');
@@ -17,7 +17,7 @@ galleryDiv.insertAdjacentHTML('beforeend', '<p class="card-text cap">city, state
 galleryDiv.insertAdjacentHTML('beforeend', '</div>');
 galleryDiv.insertAdjacentHTML('beforeend', '</div>');
 
-const body = document.getElementsByTagName('body');
+const body = document.querySelector('body');
 body.insertAdjacentHTML('beforeend', '<div class="modal-container">');
 body.insertAdjacentHTML('beforeend', '<div class="modal">');
 body.insertAdjacentHTML('beforeend', '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>');
@@ -32,3 +32,7 @@ body.insertAdjacentHTML('beforeend', '<p class="modal-text">123 Portland Ave., P
 body.insertAdjacentHTML('beforeend', '<p class="modal-text">Birthday: 10/21/2015</p>');
 body.insertAdjacentHTML('beforeend', '</div>');
 body.insertAdjacentHTML('beforeend', '</div>');
+
+console.log(searchContainerDiv);
+console.log(galleryDiv);
+console.log(body);
