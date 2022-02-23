@@ -36,3 +36,21 @@ body.insertAdjacentHTML('beforeend', '</div>');
 console.log(searchContainerDiv);
 console.log(galleryDiv);
 console.log(body);
+
+/* $.ajax({
+    url: 'https://randomuser.me/api/',
+    dataType: 'json',
+    success: function(data) {
+      console.log(data);
+    }
+}); */
+
+const xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+        console.log(typeof xhr.responseText);
+    }
+};
+
+xhr.open('GET', 'https://randomuser.me/api/');
+xhr.send();
