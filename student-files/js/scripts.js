@@ -12,13 +12,13 @@ console.log(searchContainerDiv);
 console.log(galleryDiv);
 console.log(body);
 
-$.ajax({
+/* $.ajax({
     url: 'https://randomuser.me/api/',
     dataType: 'json',
     success: function(data) {
       console.log(data);
     }
-}); 
+});  */
 
 const request = new XMLHttpRequest();
 request.onreadystatechange = function() {
@@ -31,23 +31,22 @@ request.onreadystatechange = function() {
         for (let i = 0; i < employees.length; i++) {
             let statusHTML = "<div class='card'>";
             statusHTML += "<div class='card-img-container'>";
-            statusHTML += `<img class='card-img' src='${employees[i].image}' alt='profile-picture'>`;
+            statusHTML += `<img class='card-img' src='${employees[i].picture.large}' alt='profile-picture'>`;
             statusHTML += "</div>";
             statusHTML += "<div class='card-info-container'>";
-            statusHTML += '<h3 id="name" class="card">';
-            statusHTML += `${employees[i].name}`;
+            statusHTML += '<h3 id="name" class="modal-name cap">';
+            statusHTML += employees[i].name.title + ' ' + employees[i].name.first + ' ' + employees[i].name.last;
             statusHTML += '</h3>';
             statusHTML += '<p class="card-text">';
-            statusHTML += `${employees[i].email}`;
+            statusHTML += employees[i].email;
             statusHTML += '</p>';
             statusHTML += '<p class="card-text cap">';
-            statusHTML += `${employees[i].location}`;
+            statusHTML += employees[i].location.city + ', ' + employees[i].location.country;
             statusHTML += '</p>';
             statusHTML += '</div>';
             statusHTML += '</div>';
             galleryDiv.insertAdjacentHTML('beforeend', statusHTML);
         }
-        
         
 
         /* const getCloseButton = document.getElementById('modal-close-btn');
@@ -58,56 +57,46 @@ request.onreadystatechange = function() {
 request.open('GET', 'https://randomuser.me/api/?results=12', true);
 request.send();
 
-/* const url = 'https://randomuser.me/api/?results=12&inc=image,name,email,location';
 
 
-async function getEmployees(url) {
-    const employeeResponse = await fetch(url);
-    const employeeJSON = await employeeResponse.json();
 
-    const profiles = employeeJSON.employees.map( async (employees) => {
-        const profileResponse = await fetch ( employees.image + employees.name + employees.email + employees.location);
-        const profileJSON = await profileResponse.json();
-    });
-}
+const getCardDiv = document.getElementsByClassName('card');
+console.log(getCardDiv);
 
 
 
 
-
-function generateHTML(data) {
-    data.map( person => {
+getCardDiv.addEventListener('click', (event) => {
+    
+    if (event.target === getCardDiv) {
+        let modalHTML = '<div class="modal-container">';
+        modalHTML = '<div class="modal">';
+        modalHTML =  '<button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>';
+        modalHTML =  '<div class="modal-info-container">';
+        modalHTML =  '<img class="modal-img" src="https://placehold.it/125x125" alt="profile picture">';
+        modalHTML =  '<h3 id="name" class="modal-name cap">name</h3>';
+        modalHTML =  '<p class="modal-text">email</p>';
+        modalHTML =  '<p class="modal-text cap">city</p>';
+        modalHTML =  '<hr>';
+        modalHTML =  '<p class="modal-text">(555) 555-5555</p>';
+        modalHTML =  '<p class="modal-text">123 Portland Ave., Portland, OR 97204</p>';
+        modalHTML =  '<p class="modal-text">Birthday: 10/21/2015</p>';
+        modalHTML =  '</div>';
+        modalHTML =  '</div>';
         
-        const getCardDiv = document.querySelector('.card');
-        getCardDiv.appendChild(statusHTML);
+        body.insertAdjacentHTML('beforeend', modalHTML);
 
-        let statusHTML = "<div class='card-img-container'>";
-        for (let i = 0; i < employees.length; i++) {
-            statusHMTL += `<img class='card-img' src='${employees[i].image}' alt='profile-picture'>`;
-        }
-        statusHTML += "</div>";
-        
-        statusHTML = "<div class='card-info-container'>";
-        for (let i = 0; i < employees.length; i++) {
-            statusHTML += '<h3 id="name" class="card-name cap">';
-            statusHTML += employees[i].name;
-            statusHTML += '</h3>';
-            statusHTML += '<p class="card-text">';
-            statusHTML += employees[i].email;
-            statusHTML += '</p>';
-            statusHTML += '<p class="card-text cap">'
-            statusHTML += employees[i].location;
-            statusHTML += '</p>';
+        modalHTML.style.display = "block";
+        console.log(modalContainer);
 
-        }
-        statusHTML += '</div>'
+        let getCloseButton = document.getElementById('modal-close-btn');
+        console.log(getCloseButton);
+        getCloseButton.addEventListener('click', (event) => {
+            if (event.target === getCloseButton || event.target === galleryDiv) {
+                modalHTML.style.display = 'none';
+            }
+        });
+    } 
 
-    })
+});
 
-}
-
-
-const getCloseButton = document.getElementById('modal-close-btn');
-getCloseButton.addEventListener('click', (event) => {
-
-}); */
