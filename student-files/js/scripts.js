@@ -84,29 +84,62 @@ function insertModal() {
         
 }
 
+let getModal = document.querySelector('.modal');
+let getCloseButton = document.getElementById('modal-close-btn');
 
+/* function showModal() {
+    insertModal();
+} */
 
+//function windowOnClick(event) {
+    
+//}
 
-for (let i = 0; i < getCardDiv.length; i++) {
+ for (let i = 0; i < getCardDiv.length; i++) {
 
-    getCardDiv[i].addEventListener('click', (event) => {
-            insertModal(event).style.display = "block";
+    getCardDiv.onclick = function(){
+        insertModal();
+    }
+    
+    getCloseButton.onclick = function(){
+        getModal.style.display = "none"
+    }
+    
+    window.onclick = function(e){
+        if(e.target == getModal){
+          getModal.style.display = "none"
+        }
+    }
+    
+    
+    
+    
+    /* getCardDiv[i].addEventListener('click', event => {
+        if (event.target = getCardDiv) {
+            showModal();
+        }
 
+    }); */
             
+} 
 
-            
 
-            //console.log(modalContainer);
 
-            let getCloseButton = document.getElementById('modal-close-btn');
-            console.log(getCloseButton);
-            getCloseButton.addEventListener('click', (event) => {
-                if (event.target === getCloseButton || event.target === galleryDiv) {
-                    modalHTML.style.display = 'none';
-                }
-            });
-        
 
-    });
 
-}
+
+
+     //console.log(modalContainer);
+
+   
+     
+     
+/*      console.log(getCloseButton);
+     getCloseButton.addEventListener('click', (event) => {
+         if (event.target === getCloseButton || event.target === galleryDiv) {
+             modalHTML.style.display = 'none';
+         }
+     });
+ 
+
+}); */
