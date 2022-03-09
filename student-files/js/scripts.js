@@ -1,16 +1,23 @@
 
 const searchContainerDiv = document.querySelector('.search-container');
-
-
 const galleryDiv = document.getElementById('gallery');
-
-
 const body = document.querySelector('body');
+const urlAPI = 'https://randomuser.me/api/?results=12';
+const employees = [];
+let getModal = document.querySelector('.modal');
+let getCloseButton = document.getElementById('modal-close-btn');
 
 
 console.log(searchContainerDiv);
 console.log(galleryDiv);
 console.log(body);
+
+
+fetch(urlAPI)
+.then(response => response.json())
+.then(data => console.log(data))
+
+
 
 /* $.ajax({
     url: 'https://randomuser.me/api/',
@@ -20,7 +27,7 @@ console.log(body);
     }
 });  */
 
-const request = new XMLHttpRequest();
+/* const request = new XMLHttpRequest();
 request.onreadystatechange = function() {
     if (request.readyState === 4) {
         const results = JSON.parse(request.responseText);
@@ -51,10 +58,10 @@ request.onreadystatechange = function() {
 
         /* const getCloseButton = document.getElementById('modal-close-btn');
         getCloseButton.addEventListener('click', () => getJSON('https://randomuser.me/api/?results=12')); */
-    }
-};
+  //  }
+//};
 
-request.open('GET', 'https://randomuser.me/api/?results=12', true);
+/* request.open('GET', 'https://randomuser.me/api/?results=12', true);
 request.send();
 
 
@@ -85,7 +92,7 @@ function insertModal() {
 }
 
 let getModal = document.querySelector('.modal');
-let getCloseButton = document.getElementById('modal-close-btn');
+let getCloseButton = document.getElementById('modal-close-btn'); */ 
 
 /* function showModal() {
     insertModal();
@@ -95,7 +102,7 @@ let getCloseButton = document.getElementById('modal-close-btn');
     
 //}
 
- for (let i = 0; i < getCardDiv.length; i++) {
+/*  for (let i = 0; i < getCardDiv.length; i++) {
 
     getCardDiv.onclick = function(){
         insertModal();
@@ -109,7 +116,7 @@ let getCloseButton = document.getElementById('modal-close-btn');
         if(e.target == getModal){
           getModal.style.display = "none"
         }
-    }
+    } */
     
     
     
@@ -121,7 +128,7 @@ let getCloseButton = document.getElementById('modal-close-btn');
 
     }); */
             
-} 
+//} 
 
 
 
