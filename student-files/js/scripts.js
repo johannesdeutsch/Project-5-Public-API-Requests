@@ -3,7 +3,7 @@ const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.getElementById('gallery');
 const body = document.querySelector('body');
 const urlAPI = 'https://randomuser.me/api/?results=12';
-const employees = [];
+let employees = [];
 let getModal = document.querySelector('.modal');
 let getCloseButton = document.getElementById('modal-close-btn');
 
@@ -15,7 +15,59 @@ console.log(body);
 
 fetch(urlAPI)
 .then(response => response.json())
-.then(data => console.log(data))
+.then(response => response.results)
+.then(displayEmployees)
+.catch(err => console.log(err))
+
+function displayEmployees(employeeData) {
+    employees = employeeData;
+    employeeHTML = '';
+
+    employees.forEach((employee, index) => {
+        let firstName = employee.name.first;
+        let lastName = employee.name.last;
+        let email = employee.email;
+        let city = employee.location.city;
+        let picture = employee.picture.large;
+
+        employeeHTML += `
+        <div class='card' data-index='${index}'>
+        <div class='card-img-container'>
+        <img class='card-img' src='${picture}' alt='profile-picture'>
+        </div>
+        <div class='card-info-container'>
+        <h3 id="name" class="modal-name cap">${firstName} ${lastName}</h3>
+        <p class="card-text">${email}</p>
+        <p class="card-text cap">${city}</p>
+        </div>
+        </div>
+        `   
+    });
+    
+    galleryDiv.insertAdjacentHTML('beforeend', employeeHTML);
+}
+
+/* function displayEmployees(employeeData) {
+    let statusHTML = `
+            <div class='card'>
+            <div class='card-img-container'>"
+            <img class='card-img' src='${employees[i].picture.large}' alt='profile-picture'>
+            </div>
+            <div class='card-info-container'>
+            <h3 id="name" class="modal-name cap">
+            ${employees[i].name.title} + ' ' + employees[i].name.first + ' ' + employees[i].name.last
+            '</h3>'
+            <p class="card-text">'
+            employees[i].email
+            '</p>'
+            '<p class="card-text cap">'
+            employees[i].location.city + ', ' + employees[i].location.country
+            '</p>'
+            '</div>'
+            '</div>'
+            `
+
+} */
 
 
 
