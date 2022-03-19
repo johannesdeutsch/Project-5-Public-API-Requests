@@ -18,6 +18,7 @@ fetch(urlAPI)
 .then(response => response.json())
 .then(response => response.results)
 .then(displayEmployees)
+.then(searchForm)
 .catch(err => console.log(err))
 
 function displayEmployees(employeeData) {
@@ -48,6 +49,22 @@ function displayEmployees(employeeData) {
     galleryDiv.innerHTML = employeeHTML;
 }
 
+const getSearchContainer = document.querySelector('.search-container');
+
+function searchForm() {
+    const searchContainer = `
+        <form action='#' method='get'>
+        <input type='search' id='search-input' class='search-input' placeholder='Search...'>
+        <input type='submit' value='&#x1F50D;' id='search-submit' class='search-submit'>
+        </form>
+    `
+    
+    getSearchContainer.insertAdjacentHTML('beforeend', searchContainer);
+}
+
+
+
+
 function displayModal(index) {
     let { firstName, lastName, dob, phone, email, location: { city, street, state, postcode }, picture } = employees[index];
     
@@ -71,7 +88,7 @@ function displayModal(index) {
     `;
     
     
-    body.innerHTML = modalHTML;
+    body.insertAdjacentHTML('beforeend', modalHTML);
     
     let getModal = document.querySelector('.modal-container');
     getModal.style.display = 'block';
@@ -81,7 +98,7 @@ function displayModal(index) {
     let getCloseButton = document.getElementById('modal-close-btn');
 
     getCloseButton.addEventListener('click', () => {
-        getModal.style.display = 'none';
+        getModal.style.display = 'none'; 
     });
 
 
@@ -96,3 +113,28 @@ galleryDiv.addEventListener('click', e => {
         displayModal(index);
     }
 });
+
+let getSearchInput = document.querySelector('.search-input');
+
+getSearchInput.addEventListener('input', (e) => {
+     
+    let searchInput = e.target.value.toLowerCase;
+    let cardNames = document.querySelectorAll('#name');  
+        
+    cardNames.forEach(cardName => {
+        if (cardName.textContent.toLowerCase.includes(searchInput)) {
+            cardName.parentElement.parentElement.style.display = '';
+
+        } else {
+            cardName.parentElement.parentElement.style.display = 'none';
+        }
+
+    });       
+    
+});
+
+/* let searchButton = document.getElementById('search-submit');
+searchButton.addEventListener('click', () => {
+    searchFunction();
+}); */
+
