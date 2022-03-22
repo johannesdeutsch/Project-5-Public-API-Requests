@@ -21,6 +21,7 @@ fetch(urlAPI)
 .then(searchForm)
 .catch(err => console.log(err))
 
+
 function displayEmployees(employeeData) {
     employees = employeeData;
     employeeHTML = '';
@@ -49,7 +50,9 @@ function displayEmployees(employeeData) {
     galleryDiv.innerHTML = employeeHTML;
 }
 
+
 const getSearchContainer = document.querySelector('.search-container');
+
 
 function searchForm() {
     const searchContainer = `
@@ -60,7 +63,34 @@ function searchForm() {
     `
     
     getSearchContainer.insertAdjacentHTML('beforeend', searchContainer);
+
+    
 }
+
+
+let getSearchInput = document.getElementById('search-input');
+
+
+getSearchInput.addEventListener('input', () => {
+     
+    let getSearch = e.target.value.toLowerCase;
+    
+    let cardNames = document.querySelectorAll('#name');  
+        
+    cardNames.forEach(cardName => {
+        if (cardName.innerText.toLowerCase.includes(input.toLowerCase())) {
+            cardName.parentElement.parentElement.style.display = 'block';
+
+        } else {
+            cardName.parentElement.parentElement.style.display = 'none';
+        }
+    });       
+    
+       
+
+
+}); 
+
 
 
 
@@ -85,21 +115,26 @@ function displayModal(index) {
     <p class="modal-text">Birthday: ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
     </div>
     </div>
+    <div class="modal-btn-container">
+    <button type="button" id="modal-prev" class="modal-prev btn">Prev</button>
+    <button type="button" id="modal-next" class="modal-next btn">Next</button>
+    </div>
     `;
     
     
     body.insertAdjacentHTML('beforeend', modalHTML);
     
+    
     let getModal = document.querySelector('.modal-container');
     getModal.style.display = 'block';
 
-    
 
     let getCloseButton = document.getElementById('modal-close-btn');
 
     getCloseButton.addEventListener('click', () => {
         getModal.style.display = 'none'; 
     });
+
 
 
 }
@@ -111,27 +146,32 @@ galleryDiv.addEventListener('click', e => {
         const card = e.target.closest('.card');
         index = card.getAttribute('data-index');
         displayModal(index);
-    }
-});
 
-let getSearchInput = document.querySelector('.search-input');
-
-getSearchInput.addEventListener('input', (e) => {
-     
-    let searchInput = e.target.value.toLowerCase;
-    let cardNames = document.querySelectorAll('#name');  
-        
-    cardNames.forEach(cardName => {
-        if (cardName.textContent.toLowerCase.includes(searchInput)) {
-            cardName.parentElement.parentElement.style.display = '';
-
-        } else {
-            cardName.parentElement.parentElement.style.display = 'none';
-        }
-
-    });       
     
-});
+        
+
+    }
+
+        /* let getModalPrev = document.getElementById('modal-prev');
+        let getModalNext = document.getElementById('modal-next');
+    
+        getModalPrev = document.addEventListener('click', e => {
+            displayModal(index - 1);
+        });
+    
+        getModalNext = document.addEventListener('click', e => {
+            displayModal(index +1 );
+        });   */
+
+
+
+}); 
+
+
+
+
+
+
 
 /* let searchButton = document.getElementById('search-submit');
 searchButton.addEventListener('click', () => {
