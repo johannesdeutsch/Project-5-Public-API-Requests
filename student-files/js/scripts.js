@@ -19,6 +19,7 @@ fetch(urlAPI)
 .then(response => response.results)
 .then(displayEmployees)
 .then(searchForm)
+.then(searchFunctionality)
 .catch(err => console.log(err))
 
 
@@ -27,8 +28,7 @@ function displayEmployees(employeeData) {
     employeeHTML = '';
 
     employees.forEach((employee, index) => {
-        let firstName = employee.name.first;
-        let lastName = employee.name.last;
+        let name = employee.name;
         let email = employee.email;
         let city = employee.location.city;
         let picture = employee.picture;
@@ -39,7 +39,7 @@ function displayEmployees(employeeData) {
         <img class='card-img' src='${picture.large}' alt='profile-picture'>
         </div>
         <div class='card-info-container'>
-        <h3 id="name" class="modal-name cap">${firstName} ${lastName}</h3>
+        <h3 id="name" class="modal-name cap">${name.first} ${name.last}</h3>
         <p class="card-text">${email}</p>
         <p class="card-text cap">${city}</p>
         </div>
@@ -68,35 +68,32 @@ function searchForm() {
 }
 
 
-let getSearchInput = document.getElementById('search-input');
+function searchFunctionality() {
 
+    let getSearchInput = document.getElementById('search-input');
 
-getSearchInput.addEventListener('input', () => {
-     
-    let getSearch = e.target.value.toLowerCase;
-    
-    let cardNames = document.querySelectorAll('#name');  
+    getSearchInput.addEventListener('input', (e) => {
         
-    cardNames.forEach(cardName => {
-        if (cardName.innerText.toLowerCase.includes(input.toLowerCase())) {
-            cardName.parentElement.parentElement.style.display = 'block';
+        let getSearch = e.target.value.toLowerCase();
+        
+        let cardNames = document.querySelectorAll('#name');  
+            
+        cardNames.forEach(cardName => {
+            if (cardName.textContent.toLowerCase().includes(getSearch)) {
+                cardName.parentElement.parentElement.style.display = 'block';
+            } else {
+                cardName.parentElement.parentElement.style.display = 'none';
+            }
+        });       
 
-        } else {
-            cardName.parentElement.parentElement.style.display = 'none';
-        }
-    });       
-    
-       
+    }); 
 
-
-}); 
-
-
+};
 
 
 
 function displayModal(index) {
-    let { firstName, lastName, dob, phone, email, location: { city, street, state, postcode }, picture } = employees[index];
+    let { name, dob, phone, email, location: { city, street, state, postcode }, picture } = employees[index];
     
     let date = new Date(dob.date);
 
@@ -106,7 +103,7 @@ function displayModal(index) {
     <button type="button" id="modal-close-btn" class="modal-close-btn"><strong>X</strong></button>'
     <div class="modal-info-container">
     <img class="modal-img" src="${picture.large}" alt="profile picture">
-    <h3 id="name" class="modal-name cap">${firstName} ${lastName}</h3>
+    <h3 id="name" class="modal-name cap">${name.first} ${name.last}</h3>
     <p class="modal-text">${email}</p>
     <p class="modal-text cap">${city}</p>
     <hr>
@@ -124,8 +121,13 @@ function displayModal(index) {
     
     body.insertAdjacentHTML('beforeend', modalHTML);
     
-    
-    let getModal = document.querySelector('.modal-container');
+    getModal.style.display = 'none';
+   
+
+}
+
+
+function activateModal(index) {
     getModal.style.display = 'block';
 
 
@@ -136,40 +138,29 @@ function displayModal(index) {
     });
 
 
+    let getModalPrev = document.getElementById('modal-prev');
+    let getModalNext = document.getElementById('modal-next');
+    
 
+    getModal.addEventListener('click', (e) => {
+        if (e.target === getModalPrev) {
+            getModal.style.display = 'none';
+            activateModal(index - 1);
+        } else if (e.target === getModalNext) {
+            getModal.style.display = 'none';
+            activateModal(index + 1);
+        }
+    });
 }
-
 
 
 galleryDiv.addEventListener('click', e => {
     if (e.target !== galleryDiv) {
-        const card = e.target.closest('.card');
+        let card = e.target.closest('.card');
         index = card.getAttribute('data-index');
-        displayModal(index);
-
-    
-        
-
+        activateModal(index);
     }
-
-        /* let getModalPrev = document.getElementById('modal-prev');
-        let getModalNext = document.getElementById('modal-next');
-    
-        getModalPrev = document.addEventListener('click', e => {
-            displayModal(index - 1);
-        });
-    
-        getModalNext = document.addEventListener('click', e => {
-            displayModal(index +1 );
-        });   */
-
-
-
 }); 
-
-
-
-
 
 
 
