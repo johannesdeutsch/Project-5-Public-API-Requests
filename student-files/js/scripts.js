@@ -4,7 +4,7 @@ const galleryDiv = document.getElementById('gallery');
 const body = document.querySelector('body');
 const urlAPI = 'https://randomuser.me/api/?results=12';
 let employees = [];
-let getModal = document.querySelector('.modal-container');
+
 
 
 
@@ -121,13 +121,18 @@ function displayModal(index) {
     
     body.insertAdjacentHTML('beforeend', modalHTML);
     
+    
+    let getModal = document.querySelector('.modal-container');
     getModal.style.display = 'none';
-   
+    
 
 }
 
 
+
+
 function activateModal(index) {
+    let getModal = document.querySelector('.modal-container');
     getModal.style.display = 'block';
 
 
@@ -151,7 +156,7 @@ function activateModal(index) {
             activateModal(index + 1);
         }
     });
-}
+};
 
 
 galleryDiv.addEventListener('click', e => {
