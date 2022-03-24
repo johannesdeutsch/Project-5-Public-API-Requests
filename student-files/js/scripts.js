@@ -122,13 +122,13 @@ function displayModal(index) {
     body.insertAdjacentHTML('beforeend', modalHTML);
     
     
-    let getModal = document.querySelector('.modal-container');
-    getModal.style.display = 'none';
+    
     
 
 }
 
-
+let getModal = document.querySelector('.modal-container');
+    getModal.style.display = 'none';
 
 
 function activateModal(index) {
