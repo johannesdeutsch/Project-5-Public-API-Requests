@@ -121,41 +121,50 @@ function displayModal(index) {
     
     body.insertAdjacentHTML('beforeend', modalHTML);
     
-    function closeModal() {   
-        let getCloseButton = document.getElementById('modal-close-btn');
-        getCloseButton.addEventListener('click', (e) => {
-            if (e.target === getCloseButton) {
-                getModal.style.display = 'none';
-            }
-        });
-    } 
+    const getModal = document.querySelector('.modal-container');
+    const getCloseButton = document.getElementById('modal-close-btn');
+
+    getCloseButton.addEventListener('click', (e) => {
+      //const getCloseButton = document.getElementById('modal-close-btn');
+      const strong = document.querySelector('strong');
+  
+      if (e.target == getCloseButton || strong) {
+        getModal.remove();
+      } 
+    })
+   
+    let getModalPrev = document.getElementById('modal-prev');
+    let getModalNext = document.getElementById('modal-next');
     
-    
-    function toggleModals() {
-    
-        let getModalPrev = document.getElementById('modal-prev');
-        let getModalNext = document.getElementById('modal-next');
-        
-        getModal.addEventListener('click', (e) => {
-            if (e.target === getModalPrev) {
-                getModal.remove();
-                displayModal(index - 1);
-            } else if (e.target === getModalNext) {
-                getModal.remove();
-                displayModal(index + 1);
-            }
-        });
-    }
-    /* let getModal = document.querySelector('.modal-container');
-    getModal.style.display = 'none'; */
+    getModal.addEventListener('click', (e) => {
+        if (e.target === getModalPrev) {
+            getModal.remove();
+            displayModal(index - 1);
+        } else if (e.target === getModalNext) {
+            getModal.remove();
+            displayModal(index + 1);
+        }
+    });
+
 }
 
 
-
+/* let getModal = document.querySelector('.modal-container');
+getModal.style.display = 'none'; */
 
 
 /* let getModal = document.querySelector('.modal-container');
 getModal.style.display = 'block'; */
+/* function closeModal() {   
+    let getCloseButton = document.getElementById('modal-close-btn');
+    getCloseButton.addEventListener('click', (e) => {
+        if (e.target === getCloseButton) {
+            getModal.style.display = 'none';
+        }
+    });
+}  */
+
+
 
 
 
