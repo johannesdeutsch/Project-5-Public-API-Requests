@@ -121,49 +121,51 @@ function displayModal(index) {
     
     body.insertAdjacentHTML('beforeend', modalHTML);
     
+    function closeModal() {   
+        let getCloseButton = document.getElementById('modal-close-btn');
+        getCloseButton.addEventListener('click', (e) => {
+            if (e.target === getCloseButton) {
+                getModal.style.display = 'none';
+            }
+        });
+    } 
     
     
+    function toggleModals() {
     
-
+        let getModalPrev = document.getElementById('modal-prev');
+        let getModalNext = document.getElementById('modal-next');
+        
+        getModal.addEventListener('click', (e) => {
+            if (e.target === getModalPrev) {
+                getModal.remove();
+                displayModal(index - 1);
+            } else if (e.target === getModalNext) {
+                getModal.remove();
+                displayModal(index + 1);
+            }
+        });
+    }
+    /* let getModal = document.querySelector('.modal-container');
+    getModal.style.display = 'none'; */
 }
 
-let getModal = document.querySelector('.modal-container');
-    getModal.style.display = 'none';
 
 
-function activateModal(index) {
-    let getModal = document.querySelector('.modal-container');
-    getModal.style.display = 'block';
 
 
-    let getCloseButton = document.getElementById('modal-close-btn');
-
-    getCloseButton.addEventListener('click', () => {
-        getModal.style.display = 'none'; 
-    });
+/* let getModal = document.querySelector('.modal-container');
+getModal.style.display = 'block'; */
 
 
-    let getModalPrev = document.getElementById('modal-prev');
-    let getModalNext = document.getElementById('modal-next');
-    
 
-    getModal.addEventListener('click', (e) => {
-        if (e.target === getModalPrev) {
-            getModal.style.display = 'none';
-            activateModal(index - 1);
-        } else if (e.target === getModalNext) {
-            getModal.style.display = 'none';
-            activateModal(index + 1);
-        }
-    });
-};
 
 
 galleryDiv.addEventListener('click', e => {
     if (e.target !== galleryDiv) {
         let card = e.target.closest('.card');
         index = card.getAttribute('data-index');
-        activateModal(index);
+        displayModal(index);
     }
 }); 
 
