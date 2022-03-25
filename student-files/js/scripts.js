@@ -1,3 +1,7 @@
+//PROJECT 5: PUBLIC API REQUESTS
+
+
+//global variables and selecting important elements
 
 const searchContainerDiv = document.querySelector('.search-container');
 const galleryDiv = document.getElementById('gallery');
@@ -7,12 +11,7 @@ let employees = [];
 
 
 
-
-console.log(searchContainerDiv);
-console.log(galleryDiv);
-console.log(body);
-
-
+//sending a fetch request to the API
 
 fetch(urlAPI)
 .then(response => response.json())
@@ -22,6 +21,9 @@ fetch(urlAPI)
 .then(searchFunctionality)
 .catch(err => console.log(err))
 
+
+
+//display the data from the API on the page: 12 random employees
 
 function displayEmployees(employeeData) {
     employees = employeeData;
@@ -51,6 +53,9 @@ function displayEmployees(employeeData) {
 }
 
 
+
+//appending the search form to the page
+
 const getSearchContainer = document.querySelector('.search-container');
 
 
@@ -67,6 +72,10 @@ function searchForm() {
     
 }
 
+
+
+
+//setting up the search functionality: when there's an input it checks if this is included in one of the names
 
 function searchFunctionality() {
 
@@ -91,6 +100,11 @@ function searchFunctionality() {
 };
 
 
+
+
+/* the modal window function: appending the predefined HTML to the page, connecting the data to the employee cards 
+so that the correct user is shown. Included for Exceeds is also a functionality to toggle forwards and backwards 
+beetween the employees when the modal window is open */
 
 function displayModal(index) {
     let { name, dob, phone, email, location: { city, street, state, postcode }, picture } = employees[index];
@@ -125,50 +139,42 @@ function displayModal(index) {
     const getCloseButton = document.getElementById('modal-close-btn');
 
     getCloseButton.addEventListener('click', (e) => {
-      //const getCloseButton = document.getElementById('modal-close-btn');
       const strong = document.querySelector('strong');
   
       if (e.target == getCloseButton || strong) {
         getModal.remove();
       } 
-    })
+    });
    
     let getModalPrev = document.getElementById('modal-prev');
     let getModalNext = document.getElementById('modal-next');
-    
-    getModal.addEventListener('click', (e) => {
-        if (e.target === getModalPrev) {
+    let parsed = parseInt(index);
+
+    getModalPrev.addEventListener('click', (e) => {
+        if (e.target === getModalPrev && parsed !== 0) {
+            getModal.remove(); 
+            displayModal(parsed - 1);
+        } else if (e.target === getModalPrev && parsed === 0){
             getModal.remove();
-            displayModal(index - 1);
-        } else if (e.target === getModalNext) {
+            displayModal(11);
+        }
+    });
+
+    getModalNext.addEventListener('click', (e) => {
+        if (e.target === getModalNext && parsed !== 11) {
             getModal.remove();
-            displayModal(index + 1);
+            displayModal(parsed + 1);
+        } else if (e.target === getModalNext && parsed === 11) {
+            getModal.remove();
+            displayModal(0);           
         }
     });
 
 }
 
 
-/* let getModal = document.querySelector('.modal-container');
-getModal.style.display = 'none'; */
 
-
-/* let getModal = document.querySelector('.modal-container');
-getModal.style.display = 'block'; */
-/* function closeModal() {   
-    let getCloseButton = document.getElementById('modal-close-btn');
-    getCloseButton.addEventListener('click', (e) => {
-        if (e.target === getCloseButton) {
-            getModal.style.display = 'none';
-        }
-    });
-}  */
-
-
-
-
-
-
+//the event listener to open the modal when a card is clicked
 
 galleryDiv.addEventListener('click', e => {
     if (e.target !== galleryDiv) {
@@ -177,11 +183,4 @@ galleryDiv.addEventListener('click', e => {
         displayModal(index);
     }
 }); 
-
-
-
-/* let searchButton = document.getElementById('search-submit');
-searchButton.addEventListener('click', () => {
-    searchFunction();
-}); */
 

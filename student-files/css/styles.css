@@ -14,9 +14,9 @@ html, body {
 }
 
 body {
-    font-family: "Nunito", sans-serif;
+    font-family: "Palatino";
     text-align: center;
-    background: rgba(235, 235, 235, 0.9);
+    background: rgba(250, 245, 226, 0.9);
 }
 
 header {
