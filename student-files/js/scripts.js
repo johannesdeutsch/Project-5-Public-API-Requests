@@ -89,7 +89,7 @@ function searchFunctionality() {
             
         cardNames.forEach(cardName => {
             if (cardName.textContent.toLowerCase().includes(getSearch)) {
-                cardName.parentElement.parentElement.style.display = 'block';
+                cardName.parentElement.parentElement.style.display = 'flex';
             } else {
                 cardName.parentElement.parentElement.style.display = 'none';
             }
